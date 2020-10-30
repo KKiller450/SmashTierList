@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { Table } from "react-bootstrap";
 import Modal from "./Modal";
 import TrashCan from "../../../storage/app/public/Icons/trash_can.png";
 import UpArrow from "../../../storage/app/public/Icons/uparrow.png";
 import DownArrow from "../../../storage/app/public/Icons/downarrow.png";
 import axios from "axios";
-import mario from "../../../storage/app/public/SmashCharacters/Icons/mario.png";
-import donkeykong from "../../../storage/app/public/SmashCharacters/Icons/donkeykong.png";
-import link from "../../../storage/app/public/SmashCharacters/Icons/link.png";
-import samus from "../../../storage/app/public/SmashCharacters/Icons/samus.png";
-import yoshi from "../../../storage/app/public/SmashCharacters/Icons/yoshi.png";
-import kirby from "../../../storage/app/public/SmashCharacters/Icons/kirby.png";
-import fox from "../../../storage/app/public/SmashCharacters/Icons/fox.png";
-import pikachu from "../../../storage/app/public/SmashCharacters/Icons/pikachu.png";
-import luigi from "../../../storage/app/public/SmashCharacters/Icons/luigi.png";
-import ness from "../../../storage/app/public/SmashCharacters/Icons/ness.png";
-import captainfalcon from "../../../storage/app/public/SmashCharacters/Icons/captainfalcon.png";
-import jigglypuff from "../../../storage/app/public/SmashCharacters/Icons/jigglypuff.png";
 
 function TableComp() {
     useEffect(() => {
         fetchItems();
     }, []);
 
+    //Get
     const [listItems, setListItems] = useState([]);
+
+    //Add
+    const [name, setName] = useState([""]);
+    const [tag, setTag] = useState([""]);
+    const [location, setLocation] = useState([""]);
+    const [character, setCharacter] = useState([""]);
+    const [votes, setVotesCount] = useState(0);
+
+    //Modal
     const [isOpen, setIsOpen] = useState(false);
+
+    //Sort & Search
     const [direction, setDirection] = useState("asc");
     const [columnName, setColumnName] = useState("votes");
     const [search, setSearch] = useState("");
@@ -51,61 +49,108 @@ function TableComp() {
             })
             .then(Response => {
                 const listItems = Response.data;
-                console.log(listItems);
                 setListItems(listItems);
-                console.log(Response);
-                console.log(direction);
+            });
+    };
+
+    const addItems = () => {
+        if (
+            (name,
+            tag,
+            location,
+            character == null || name,
+            tag,
+            location,
+            character == "")
+        ) {
+            alert("Please fill out entire form");
+            return;
+        }
+        axios
+            .post("api/post-entry", {
+                name,
+                tag,
+                location,
+                character,
+                votes
+            })
+            .then(Response => {
+                setName("");
+                setTag("");
+                setLocation("");
+                setCharacter("");
+                fetchItems();
             });
     };
 
     const removeItems = id => {
         axios.delete(`api/delete-entry/${id}`).then(Response => {
-            console.log(Response);
+            fetchItems();
         });
-        fetchItems();
     };
 
-    const updateItems = (id, vote, voteChange) => {
+    const updateItems = (id, votes, voteChange) => {
         if (voteChange == "up") {
-            vote += 1;
+            votes += 1;
         } else if (voteChange == "down") {
-            vote -= 1;
+            votes -= 1;
         }
-        axios.put(`api/update-entry/${id}`, { votes: vote }).then(Response => {
-            console.log(Response);
+        axios.put(`api/update-entry/${id}`, { votes }).then(Response => {
             fetchItems();
         });
     };
 
     return (
         <div className="container">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center containerStyle">
                 <div className="col-md-12">
                     <div className="card">
                         <input
                             onChange={event => setSearch(event.target.value)}
+                            className="searchBar"
                         ></input>
-                        <button onClick={() => fetchItems()}>Search</button>
+                        <button
+                            onClick={() => fetchItems()}
+                            className="searchButton"
+                        >
+                            Search
+                        </button>
                         <Table striped bordered hover variant="dark">
                             <thead>
                                 <tr>
-                                    <th onClick={() => fetchItems("votes")}>
+                                    <th
+                                        className="pointer"
+                                        onClick={() => fetchItems("votes")}
+                                    >
                                         Ranking
                                     </th>
-                                    <th onClick={() => fetchItems("name")}>
+                                    <th
+                                        className="pointer"
+                                        onClick={() => fetchItems("name")}
+                                    >
                                         Name
                                     </th>
-                                    <th onClick={() => fetchItems("tag")}>
+                                    <th
+                                        className="pointer"
+                                        onClick={() => fetchItems("tag")}
+                                    >
                                         Tag
                                     </th>
-                                    <th onClick={() => fetchItems("location")}>
+                                    <th
+                                        className="pointer"
+                                        onClick={() => fetchItems("location")}
+                                    >
                                         Location
                                     </th>
-                                    <th onClick={() => fetchItems("character")}>
+                                    <th
+                                        className="pointer"
+                                        onClick={() => fetchItems("character")}
+                                    >
                                         Character
                                     </th>
                                     <th>Delete</th>
                                     <th
+                                        className="pointer"
                                         onClick={() => fetchItems("created_at")}
                                     >
                                         Timestamp
@@ -174,7 +219,21 @@ function TableComp() {
                             <Modal
                                 open={isOpen}
                                 onClose={() => setIsOpen(false)}
+                                name={name}
+                                onNameChange={setName}
+                                tag={tag}
+                                onTagChange={setTag}
+                                location={location}
+                                onLocationChange={setLocation}
+                                character={character}
+                                onCharacterChange={setCharacter}
                             ></Modal>
+                            <button
+                                className="btn btn-success modalButton"
+                                onClick={() => addItems()}
+                            >
+                                Submit Entry
+                            </button>
                         </div>
                     </div>
                 </div>

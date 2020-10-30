@@ -55,5 +55,20 @@ nav {
     cursor: pointer;
 }
 .modalButton {
+    margin: 20px;
+}
+.searchBar {
     margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+}
+.searchButton {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.containerStyle {
+    margin-top: 100px;
 }

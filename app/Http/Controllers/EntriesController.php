@@ -28,11 +28,6 @@ class EntriesController extends Controller
     }
     function insert(Request $request)
     {
-
-        // $test = response()->json([$request->all()]);
-        // echo $test;
-        // return;
-
        $entries = new Entries;
        $entries->name = $request->name;
        $entries->tag = $request->tag;
