@@ -25,7 +25,7 @@ function TableComp() {
     const [isOpen, setIsOpen] = useState(false);
 
     //Sort & Search
-    const [direction, setDirection] = useState("asc");
+    const [direction, setDirection] = useState("desc");
     const [columnName, setColumnName] = useState("votes");
     const [search, setSearch] = useState("");
 
@@ -115,7 +115,13 @@ function TableComp() {
                         >
                             Search
                         </button>
-                        <Table striped bordered hover variant="dark">
+                        <Table
+                            striped
+                            bordered
+                            hover
+                            variant="dark"
+                            ClassName="tableStyles"
+                        >
                             <thead>
                                 <tr>
                                     <th

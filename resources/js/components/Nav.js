@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 function About() {
     return (
         <nav>
-            <h3>Smash Players</h3>
+            <Link to="/" className="home-style">
+                <h3>Smash Players</h3>
+            </Link>
             <ul className="nav-links about">
                 <Link className="nav-style" to="/about">
                     <li>About</li>

@@ -60,7 +60,7 @@ export default function Modal({
     return (
         <>
             <div style={overlayStyles} />
-            <div style={modalStyles}>
+            <div style={modalStyles} className="borderRadius">
                 <div>
                     <form>
                         <strong>Name:</strong>

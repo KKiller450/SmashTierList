@@ -1,1 +1,1 @@
-Fresh Branch for Smash Tier List
+Smash Player Application

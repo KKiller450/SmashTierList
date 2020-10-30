@@ -22,6 +22,10 @@
     padding-left: 450px;
 }
 
+.home-style {
+    color: white;
+}
+
 nav {
     display: flex;
     justify-content: space-around;
@@ -71,4 +75,8 @@ nav {
 
 .containerStyle {
     margin-top: 100px;
+}
+
+.borderRadius {
+    border-radius: 25px;
 }
