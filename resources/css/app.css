@@ -1,0 +1,59 @@
+/* Custom CSS */
+.App {
+    text-align: center;
+}
+
+.btn {
+    background-color: rgb(73, 79, 82);
+    border-color: black;
+}
+
+.about {
+    margin-top: 16px;
+}
+
+.home {
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.nav-style {
+    color: white;
+    padding-left: 450px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background: rgb(73, 79, 82);
+    color: white;
+}
+
+.nav-links {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+
+.textBox {
+    margin-bottom: 10px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+.leftarrow {
+    margin-right: 10px;
+    cursor: pointer;
+}
+.rightarrow {
+    margin-left: 10px;
+    cursor: pointer;
+}
+.modalButton {
+    margin-top: 20px;
+}

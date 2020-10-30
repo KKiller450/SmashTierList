@@ -36,6 +36,9 @@
         ]
     },
     "dependencies": {
-        "react-bootstrap": "^1.4.0"
+        "mdbreact": "^4.27.0",
+        "react-bootstrap": "^1.4.0",
+        "react-bootstrap-table-next": "^4.0.3",
+        "react-modal": "^3.11.2"
     }
 }

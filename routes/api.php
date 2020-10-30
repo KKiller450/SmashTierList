@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EntriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/entry', [EntriesController::class, 'show']);
+
+Route::post('/post-entry', [EntriesController::class, 'insert']);
+Route::put('/update-entry/{id}', [EntriesController::class, 'update']);
+Route::delete('/delete-entry/{id}', [EntriesController::class, 'delete']);
